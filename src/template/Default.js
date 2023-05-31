@@ -7,8 +7,8 @@ const Default =({children})=>{
   return(
     <>
       <Header/>
-      {children}
-    <footer>FOOTER</footer>
+        {children}
+      <footer>FOOTER</footer>
     </>
   )
 }
