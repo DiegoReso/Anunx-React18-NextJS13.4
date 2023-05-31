@@ -15,12 +15,15 @@ export default function RootLayout({ children }) {
   return (
     
     <ThemeProvider theme={theme}>
-    <html lang="pt-br">
 
-    
+      <html lang="pt-br">
+
+      <title>{metadata.title}</title>
+
       <body>{children}</body>
 
     </html>
+    
     </ThemeProvider>
     
   )

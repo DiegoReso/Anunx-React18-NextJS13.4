@@ -1,11 +1,17 @@
+'use client'
 
+import { Container } from '@mui/material'
+import TemplateDefault from '../src/template/Default'
 
 export default function Home() {
   return (
-    <>
-      <h1>HOME</h1>
-
-    </>
+   
+    <TemplateDefault>
+      <Container maxWidth="sm">
+        <h1>HOme</h1>
+      </Container>
+    </TemplateDefault>
+      
     
   )
 }
