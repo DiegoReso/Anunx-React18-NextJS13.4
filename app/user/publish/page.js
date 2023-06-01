@@ -1,10 +1,13 @@
 'use client'
 
-import { Box, Button, Container, Select, TextField, Typography } from "@mui/material"
+import { Box, Button, Container, IconButton, Select, TextField, Typography } from "@mui/material"
 import TemplateDefault from "../../../src/template/Default"
+import { DeleteForever } from "@mui/icons-material"
 
 
 const Publish =()=>{
+
+ 
 
 
   return(
@@ -91,16 +94,90 @@ const Publish =()=>{
        maxWidth="md"
        sx={{mt: '25px'}}
        >
-        <Box sx={{bgcolor:'white',borderRadius: '12px', p:'10px'}}>
-        <Typography 
-        component="h6" 
-        variant="h6" 
-        >
-          Imagens
-        </Typography>
-        <Typography component="h7" variant="h7">
-          A primeira imagem é a foto principal do anúncio
-        </Typography>
+        <Box 
+          sx={{bgcolor:'white',
+          borderRadius: '12px', 
+          p:'10px'
+          }}>
+          <Typography 
+          component="h6" 
+          variant="h6" 
+          >
+            Imagens
+          </Typography>
+          <Typography component="h7" variant="h7">
+            A primeira imagem é a foto principal do anúncio
+          </Typography>
+
+          <Box sx={{display: 'flex',gap : 1}}>
+            <Box 
+            sx={{
+              display:'flex',
+              justifyContent: 'center',
+              alignItems: 'Center',
+              mt: '10px',
+              border: '2px dashed grey',
+              width: 200,
+              height: 150,
+              bgcolor: '#e0e0e0'
+            }}>
+              <Typography
+               align="center" 
+               variant="body2"
+              
+               >
+                Clique ou arraste a imagem aqui.
+              </Typography>
+
+            </Box>
+            <Box
+              sx={{
+                display:'flex',
+                justifyContent: 'center',
+                alignItems: 'Center',
+                mt: '10px',
+                border: '2px dashed grey',
+                width: 200,
+                height: 150,
+                bgcolor: '#e0e0e0',
+                backgroundSize: 'Cover',
+                backgroundImage: 'url(https://source.unsplash.com/random/140x140/?products)',
+                  
+               
+              }}>
+                <Box
+                  sx={{
+                    display:'flex',
+                    position: 'relative',
+                    justifyContent: 'center',
+                    alignItems: 'Center',
+                    width: 200,
+                    height: 150,
+                    "&:hover": {
+                      backgroundColor: 'rgba(0, 0, 0, 0.7)'
+                    },
+                  }}
+                 >
+                  
+                  <IconButton>
+                    <DeleteForever fontSize="large" color="secondary"/>
+                  </IconButton>
+                  <Box 
+                    sx={{
+                      position: 'absolute',
+                      left: 0,
+                      bottom:0,
+                      backgroundColor: 'blue',
+                    }}
+                  >
+                    <Typography variant="body2" color="secondary">
+                      Principal
+                    </Typography>
+                  </Box>
+                </Box>
+                
+              </Box>
+          </Box>  
         </Box>
       </Container>
       
