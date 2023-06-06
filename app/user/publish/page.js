@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Button, Container, IconButton, Select, TextField, Typography } from "@mui/material"
+import { Box, Button, Container, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, Select, TextField, Typography } from "@mui/material"
 import TemplateDefault from "../../../src/template/Default"
 import { DeleteForever } from "@mui/icons-material"
 
@@ -260,6 +260,33 @@ const Publish =()=>{
           
         </Box>
       </Container>
+
+    <Container
+       maxWidth="md"
+       sx={{mt: '25px'}}
+       >
+        <Box sx={{bgcolor:'white',borderRadius: '12px', p:'10px'}}>
+          <Typography 
+          component="h6" 
+          variant="h6" 
+          >
+            Preço
+          </Typography>
+          <br />
+            <FormControl fullWidth variant="outlined">
+              
+              <OutlinedInput 
+                onChange={()=>{}}
+                startAdornment ={<InputAdornment position="start">R$</InputAdornment>}
+                labelWidth={40}
+          
+            />
+              
+            
+          </FormControl>
+        </Box>
+      </Container>
+     
 
       
       <Container
