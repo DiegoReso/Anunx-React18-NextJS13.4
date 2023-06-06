@@ -4,10 +4,37 @@ import { Box, Button, Container, IconButton, Select, TextField, Typography } fro
 import TemplateDefault from "../../../src/template/Default"
 import { DeleteForever } from "@mui/icons-material"
 
+import {useDropzone} from 'react-dropzone'
+import { useState } from "react"
+
 
 const Publish =()=>{
 
+  const [files,setFiles] = useState([])
  
+  const {getRootProps, getInputProps} = useDropzone({
+    accept: 'image/*',
+    onDrop: (acceptedFile)=>{
+      
+      const newFiles = acceptedFile.map( file => {
+        return Object.assign(file,{
+          preview: URL.createObjectURL(file)
+        })
+      })
+
+        setFiles([
+          ...files,
+          ...newFiles
+        ])
+    }
+  })
+
+
+  const handleRemoveFile = fileName => {
+    const newfileState = files.filter (file => file.name !== fileName)
+
+    setFiles(newfileState)
+  }
 
 
   return(
@@ -109,18 +136,28 @@ const Publish =()=>{
             A primeira imagem é a foto principal do anúncio
           </Typography>
 
-          <Box sx={{display: 'flex',gap : 1}}>
+          <Box 
+            sx={{
+              display: 'flex',
+              gap : 1,
+              flexWrap: 'wrap',
+              ml: '15px'
+          }}>
             <Box 
+            {...getRootProps()}
+
             sx={{
               display:'flex',
               justifyContent: 'center',
               alignItems: 'Center',
               mt: '10px',
               border: '2px dashed grey',
-              width: 200,
+              width: 150,
               height: 150,
               bgcolor: '#e0e0e0'
+              
             }}>
+              <input {...getInputProps()} />
               <Typography
                align="center" 
                variant="body2"
@@ -130,53 +167,75 @@ const Publish =()=>{
               </Typography>
 
             </Box>
-            <Box
-              sx={{
-                display:'flex',
-                justifyContent: 'center',
-                alignItems: 'Center',
-                mt: '10px',
-                border: '2px dashed grey',
-                width: 200,
-                height: 150,
-                bgcolor: '#e0e0e0',
-                backgroundSize: 'Cover',
-                backgroundImage: 'url(https://source.unsplash.com/random/140x140/?products)',
+
+              {
+
+                files.map((file , index)=> (
                   
-               
-              }}>
                 <Box
+                  key={file.name}
                   sx={{
                     display:'flex',
-                    position: 'relative',
                     justifyContent: 'center',
                     alignItems: 'Center',
-                    width: 200,
+                    mt: '10px',
+                    border: '2px dashed grey',
+                    width: 150,
                     height: 150,
-                    "&:hover": {
-                      backgroundColor: 'rgba(0, 0, 0, 0.7)'
-                    },
-                  }}
-                 >
-                  
-                  <IconButton>
-                    <DeleteForever fontSize="large" color="secondary"/>
-                  </IconButton>
-                  <Box 
-                    sx={{
-                      position: 'absolute',
-                      left: 0,
-                      bottom:0,
-                      backgroundColor: 'blue',
-                    }}
-                  >
-                    <Typography variant="body2" color="secondary">
-                      Principal
-                    </Typography>
-                  </Box>
+                    bgcolor: '#e0e0e0',
+                    backgroundSize: 'Cover',
+                    backgroundImage: `url(${file.preview})`,
+                      
+                   
+                  }}>
+                    <Box
+                      sx={{
+                        display:'flex',
+                        position: 'relative',
+                        justifyContent: 'center',
+                        alignItems: 'Center',
+                        width: 150,
+                        height: 150,
+                        "&:hover": {
+                          backgroundColor: 'rgba(0, 0, 0, 0.7)'
+                        },
+                      }}
+                     >
+                      
+                      <IconButton onClick={() => handleRemoveFile(file.name)}>
+                        <DeleteForever fontSize="large" color="secondary"/>
+                      </IconButton>
+
+                      {
+
+                        index === 0 ?
+                        <Box 
+                        sx={{
+                          position: 'absolute',
+                          left: 0,
+                          bottom:0,
+                          backgroundColor: 'blue',
+                        }}
+                      >
+                        <Typography variant="body2" color="secondary">
+                          Principal
+                        </Typography>
+                      </Box>
+
+                      : null
+
+
+                      }
+                     
+                    </Box>
+                    
                 </Box>
-                
-              </Box>
+
+
+                ))
+              }
+
+           
           </Box>  
         </Box>
       </Container>
