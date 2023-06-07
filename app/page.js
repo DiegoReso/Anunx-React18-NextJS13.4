@@ -48,7 +48,7 @@ export default function Home() {
 
 <Grid item sx={12} sm={6} md={4}>
             <Card 
-              image={'https://source.unsplash.com/random/500x500/?boston'}   
+              image={'https://source.unsplash.com/random/500x500/?nyc'}   
               title="Produto x" 
               subtitle="R$ 60,00"  
                 
