@@ -51,10 +51,18 @@ export default function ButtonAppBar() {
               color='primary'
             >
               <Link href='user/dashboard' passHref>
-                <MenuItem>Meus anúncios</MenuItem>
+                <MenuItem>
+                  <Typography color="primary">
+                    Meus anúncios
+                  </Typography>
+                </MenuItem>
               </Link>
               <Link href='user/publish' passHref>
-                <MenuItem>Publicar anúncio</MenuItem>
+                <MenuItem>
+                <Typography color="primary">
+                    Publicar anúncio
+                  </Typography>
+                </MenuItem>
               </Link>
               <Divider/>
               <MenuItem>Sair</MenuItem>

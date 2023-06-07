@@ -1,5 +1,6 @@
 'use client'
 
+import Footer from '../components/Footer'
 import Header from '../components/Header'
 
 const Default =({children})=>{
@@ -8,7 +9,7 @@ const Default =({children})=>{
     <>
       <Header/>
         {children}
-      <footer>FOOTER</footer>
+      <Footer/>
     </>
   )
 }
