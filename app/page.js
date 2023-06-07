@@ -8,7 +8,9 @@ export default function Home() {
   return (
    
     <TemplateDefault>
-      <Container maxWidth="sm">
+      <Container 
+        sx={{mt: '80px'}}
+        maxWidth="md">
         <Typography component="h1" variant="h3" align="center" color="textPrimary"> 
           O que você deseja encontrar?
         </Typography>
@@ -31,12 +33,13 @@ export default function Home() {
         </Paper>
       </Container>
       
+    
+
+      
+      <Container maxWidth="lg">
       <Typography sx={{mt: '20px'}} component="h2" variant="h5" align="center" color="textPrimary"> 
           Destaques
         </Typography>
-
-      
-      <Container maxWidth="md">
       <Grid
           container
           spacing={2}
@@ -47,9 +50,9 @@ export default function Home() {
             <Card>
               <CardMedia
                 component="img"
-                image={'https://source.unsplash.com/random/140x140/?china'}
+                image={'https://source.unsplash.com/random/500x500/?china'}
                 title="Titulo da imagem"
-                sx={{height: 140}}
+                sx={{height: 150}}
               />
               <CardContent>
                 <Typography variant='h5' component="h2">
@@ -67,9 +70,9 @@ export default function Home() {
             <Card>
               <CardMedia
                 component="img"
-                image={'https://source.unsplash.com/random/140x140/?brazil'}
+                image={'https://source.unsplash.com/random/500x500/?brazil'}
                 title="Titulo da imagem"
-                sx={{height: 140}}
+                sx={{height: 150}}
               />
               <CardContent>
                 <Typography variant='h5' component="h2">
@@ -87,9 +90,9 @@ export default function Home() {
             <Card>
               <CardMedia
                 component="img"
-                image={'https://source.unsplash.com/random/140x140/?japan'}
+                image={'https://source.unsplash.com/random/500x500/?japan'}
                 title="Titulo da imagem"
-                sx={{height: 140}}
+                sx={{height: 150}}
               />
               <CardContent>
                 <Typography variant='h5' component="h2">
