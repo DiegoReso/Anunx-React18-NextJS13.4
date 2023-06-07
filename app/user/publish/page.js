@@ -54,7 +54,7 @@ const Publish =()=>{
         component="h5" 
         variant="h5" 
         align="center"
-        sx={{mt: '5px'}}>
+        sx={{mt: '5px', mb: '20px'}}>
           Quanto mais detalhado melhor
         </Typography>
       </Container>
