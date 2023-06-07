@@ -9,7 +9,6 @@ export default function Home() {
    
     <TemplateDefault>
       <Container 
-        sx={{mt: '80px'}}
         maxWidth="md">
         <Typography component="h1" variant="h3" align="center" color="textPrimary"> 
           O que você deseja encontrar?
