@@ -2,6 +2,8 @@
 
 import { Avatar, Box, Card, CardHeader, CardMedia, Chip, Container, Grid, Typography } from '@mui/material'
 import TemplateDefault from '../../src/template/Default'
+import Carousel from 'react-material-ui-carousel'
+
 
 const styleBox = {
   bgcolor: 'white',
@@ -10,14 +12,41 @@ const styleBox = {
   mb: '10px'
 }
 
+const cardCarousel = {
+  height : '100%'
+}
+
+const cardMedia = {
+  pt: '56%'
+}
+
 const Products =() =>{
   return(
    <TemplateDefault>
-      <Container maxWidth="lg" >
+      <Container maxWidth="lg">
         <Grid container spacing={3}> 
           <Grid item xs={8}>
             <Box sx={styleBox}>
-              Carrosel
+              <Carousel
+                autoPlay={false}
+                animation="slide"
+              >
+                <Card sx={cardCarousel}>
+                  <CardMedia
+                    sx={cardMedia}
+                    image="https://source.unsplash.com/random/500x500/?brazil"
+                    title="Titulo da imagem"
+                  />
+                </Card>
+
+                <Card sx={cardCarousel}>
+                  <CardMedia
+                    sx={cardMedia}
+                    image="https://source.unsplash.com/random/500x500/?china"
+                    title="Titulo da imagem"
+                  />
+                </Card>
+              </Carousel>
             </Box>
          
 
