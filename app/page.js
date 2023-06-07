@@ -1,8 +1,9 @@
 'use client'
 
-import { Container, Typography, InputBase, IconButton, Paper, Grid,Card,CardMedia, Button,CardContent, CardActions } from '@mui/material'
+import { Container, Typography, InputBase, IconButton, Paper, Grid } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import TemplateDefault from '../src/template/Default'
+import Card from '../src/components/Card';
 
 export default function Home() {
   return (
@@ -45,64 +46,31 @@ export default function Home() {
           sx={{mt: '50px'}}
           >
 
-          <Grid item sx={12} sm={6} md={4}>
-            <Card>
-              <CardMedia
-                component="img"
-                image={'https://source.unsplash.com/random/500x500/?china'}
-                title="Titulo da imagem"
-                sx={{height: 150}}
-              />
-              <CardContent>
-                <Typography variant='h5' component="h2">
-                  Produto x
-                </Typography>
-                <Typography>
-                  R$ 60,00
-                </Typography>
-              </CardContent>
-         
-            </Card>
+<Grid item sx={12} sm={6} md={4}>
+            <Card 
+              image={'https://source.unsplash.com/random/500x500/?boston'}   
+              title="Produto x" 
+              subtitle="R$ 60,00"  
+                
+            />
+           </Grid>   
+
+           <Grid item sx={12} sm={6} md={4}>
+             <Card 
+                image={'https://source.unsplash.com/random/500x500/?rio%20de%20janeiro'}   
+                title="Produto x" 
+                subtitle="R$ 60,00"  
+              
+            />
           </Grid>
 
           <Grid item sx={12} sm={6} md={4}>
-            <Card>
-              <CardMedia
-                component="img"
-                image={'https://source.unsplash.com/random/500x500/?brazil'}
-                title="Titulo da imagem"
-                sx={{height: 150}}
-              />
-              <CardContent>
-                <Typography variant='h5' component="h2">
-                  Produto x
-                </Typography>
-                <Typography>
-                  R$ 60,00
-                </Typography>
-              </CardContent>
-         
-            </Card>
-          </Grid>
-
-          <Grid item sx={12} sm={6} md={4}>
-            <Card>
-              <CardMedia
-                component="img"
-                image={'https://source.unsplash.com/random/500x500/?japan'}
-                title="Titulo da imagem"
-                sx={{height: 150}}
-              />
-              <CardContent>
-                <Typography variant='h5' component="h2">
-                  Produto x
-                </Typography>
-                <Typography>
-                  R$ 60,00
-                </Typography>
-              </CardContent>
-         
-            </Card>
+            <Card 
+              image={'https://source.unsplash.com/random/500x500/?sao%20paulo'}   
+              title="Produto x" 
+              subtitle="R$ 60,00"  
+              
+            />
           </Grid>
 
         </Grid>
