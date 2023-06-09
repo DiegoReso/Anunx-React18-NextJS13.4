@@ -15,10 +15,12 @@
     "@mui/material": "^5.13.3",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
+    "formik": "^2.4.1",
     "next": "13.4.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.3",
-    "react-material-ui-carousel": "^3.4.2"
+    "react-material-ui-carousel": "^3.4.2",
+    "yup": "^1.2.0"
   }
 }
