@@ -1,4 +1,5 @@
 
+
 import dbConnect from '../../src/utils/dbConnect'
 import UsersModel from '../../src/models/users'
 import { crypto } from '../../src/utils/password'
@@ -9,7 +10,8 @@ const users = async (req,res) =>{
   switch(method){
     case 'GET':
       await dbConnect()
-      res.status(200).json({success: true})
+      const users = await UsersModel.find()
+      res.status(200).json(users)
       break
 
       case 'POST':
@@ -34,6 +36,5 @@ const users = async (req,res) =>{
   }
 
 }
-
 
 export default users

@@ -1,132 +1,156 @@
 'use client'
 
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
+import { Box, Button, Container, FormControl, FormHelperText, Input, InputLabel, Typography, CircularProgress } from '@mui/material'
+import TemplateDefault from '../../../src/template/Default'
+import Link from 'next/link'
 
+import { Formik } from 'formik'
+import {initialValues, validationSchema} from './formValidationSignIn'
+import axios from 'axios'
 
+import useToasty from '../../../src/contexts/Toasty'
+import { useRouter } from 'next/navigation'
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
+const styleBox = {
+  bgcolor: 'white',
+  borderRadius: '12px',
+  p: '10px',
+  mb: '10px'
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
+
+const SignIn =()=>{
+
+  const {setToasty} = useToasty()
+  
+  const router = useRouter()
+
+  const handleFormSubmit = async values => {
+    const response = await axios.post('/api/users', values)
+
+    if (response.data.success){
+      setToasty({
+        open: true,
+        severity: 'success',
+        text: 'Cadastrado com sucesso'
+      })
+      router.push('/auth/signin')
+    }
+  }
 
 
+  return(
+    <TemplateDefault>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleFormSubmit}
+      >
+        {
+          ({
+            touched,
+            values,
+            errors,
+            handleChange,
+            handleSubmit,
+            isSubmitting,
+          })=>{
+            
 
-export default function SignInSide() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+         return(
+          <form onSubmit={handleSubmit}>       
+            <Container maxWidth="md">
+              <Box sx={styleBox}>
+              <Typography
+                align='center' 
+                component="h2" 
+                variant="h2">
+                Entre na sua conta!
+              </Typography>
+              
+              <FormControl
+                error={errors.email && touched.email}
+                sx={{mt:'20px'}}
+                fullWidth>
+                <InputLabel>
+                  Email
+                </InputLabel>
+                <Input
+                  name="email"
+                  type="email"
+                  value={values.email}
+                  onChange={handleChange}
+                >
+                  Email
+                </Input>
+                <FormHelperText>
+                  {errors.email}
+                </FormHelperText>
+              </FormControl>
 
-  return (
-   
-      <Grid container component="main" sx={{ height: '100vh' }}>
-        <CssBaseline />
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={7}
-          sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
-            backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-          <Box
-            sx={{
-              my: 8,
-              mx: 4,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign in
-            </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign In
-              </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
-              <Copyright sx={{ mt: 5 }} />
-            </Box>
-          </Box>
-        </Grid>
-      </Grid>
-    
-  );
+              <FormControl
+                error={errors.password && touched.password}
+                sx={{mt:'20px'}}
+                fullWidth>
+                <InputLabel>
+                  Senha
+                </InputLabel>
+                <Input
+                  type="password"
+                  name="password"
+                  value={values.password}
+                  onChange={handleChange}>
+                  Senha
+                </Input>
+                <FormHelperText>
+                  {errors.password}
+                </FormHelperText>
+              </FormControl>
+
+             
+              {
+                isSubmitting
+                ? (
+                  <Box 
+                    sx={{display: 'flex',
+                    justifyContent: 'center',
+                    mt:'20px'
+                    }}>
+                    <CircularProgress/> 
+                 </Box>)
+                : (
+                <Button
+                  sx={{mt:'20px'}}
+                  type="submit"
+                  variant='contained'
+                  fullWidth>
+                  Cadastrar 
+                 </Button>
+                )
+              }
+             
+              
+              <Typography
+                sx={{mt:'20px'}}>
+                Não tem uma conta? 
+                <Link 
+                  className="listStyle" 
+                  href="/signup" 
+                  passHref>
+                    Entre aqui
+                </Link>
+              </Typography>
+              </Box>
+              
+            </Container>
+            </form>
+              )
+            }
+          }
+            </Formik>
+          </TemplateDefault>
+  )
 }
+
+
+export default SignIn
