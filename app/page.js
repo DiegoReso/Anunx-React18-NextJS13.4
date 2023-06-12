@@ -5,10 +5,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import TemplateDefault from '../src/template/Default'
 import Card from '../src/components/Card';
 
+
 export default function Home() {
   return (
    
     <TemplateDefault>
+      
       <Container 
         maxWidth="md">
         <Typography component="h1" variant="h3" align="center" color="textPrimary"> 
@@ -76,7 +78,7 @@ export default function Home() {
         </Grid>
       </Container>
 
-
+          
     </TemplateDefault>
       
     

@@ -1,11 +1,15 @@
 'use client'
 
-import { Box, Button, Container, FormControl, FormHelperText, Input, InputLabel, Typography } from '@mui/material'
+import { Box, Button, Container, FormControl, FormHelperText, Input, InputLabel, Typography, CircularProgress } from '@mui/material'
 import TemplateDefault from '../../../src/template/Default'
 import Link from 'next/link'
 
 import { Formik } from 'formik'
 import {initialValues, validationSchema} from './formValidationSignUp'
+import axios from 'axios'
+
+import useToasty from '../../../src/contexts/Toasty'
+import { useRouter } from 'next/navigation'
 
 const styleBox = {
   bgcolor: 'white',
@@ -17,14 +21,30 @@ const styleBox = {
 
 const SignUp =()=>{
 
+  const {setToasty} = useToasty()
+  
+  const router = useRouter()
+
+  const handleFormSubmit = async values => {
+    const response = await axios.post('/api/users', values)
+
+    if (response.data.success){
+      setToasty({
+        open: true,
+        severity: 'success',
+        text: 'Cadastrado com sucesso'
+      })
+      router.push('/auth/signin')
+    }
+  }
+
+
   return(
     <TemplateDefault>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values)=>{
-          console.log('Ok enviou', values)
-        }}
+        onSubmit={handleFormSubmit}
       >
         {
           ({
@@ -33,6 +53,7 @@ const SignUp =()=>{
             errors,
             handleChange,
             handleSubmit,
+            isSubmitting,
           })=>{
             
 
@@ -126,14 +147,27 @@ const SignUp =()=>{
                   {errors.confirm_password}
                 </FormHelperText>
               </FormControl>
-
-              <Button
-                sx={{mt:'20px'}}
-                type="submit"
-                variant='contained'
-                fullWidth>
+              {
+                isSubmitting
+                ? (
+                  <Box 
+                    sx={{display: 'flex',
+                    justifyContent: 'center',
+                    mt:'20px'
+                    }}>
+                    <CircularProgress/> 
+                 </Box>)
+                : (
+                <Button
+                  sx={{mt:'20px'}}
+                  type="submit"
+                  variant='contained'
+                  fullWidth>
                   Cadastrar 
-              </Button>
+                 </Button>
+                )
+              }
+             
 
               
               <Typography
@@ -147,6 +181,7 @@ const SignUp =()=>{
                 </Link>
               </Typography>
               </Box>
+              
             </Container>
             </form>
               )
